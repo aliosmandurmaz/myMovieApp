@@ -6,24 +6,40 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MovieDetailsVC: UIViewController {
 
+    @IBOutlet weak var movieDetailsSummaryLabel: UILabel!
+    @IBOutlet weak var movieDetailsTypleLabel: UILabel!
+    @IBOutlet weak var movieDetailsCategoryLabel: UILabel!
+    @IBOutlet weak var movieDetailsPriceLabel: UILabel!
+    @IBOutlet weak var movieDetailsTitleLabel: UILabel!
+    @IBOutlet weak var movieDetailsImage: UIImageView!
+    
+    var movies: Movies?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        if let movie = movies {
+            
+            movieDetailsTitleLabel.text = movie.trackName
+            movieDetailsCategoryLabel.text = movie.kind
+            movieDetailsTypleLabel.text = movie.primaryGenreName
+            movieDetailsSummaryLabel.text = movie.longDescription
+            let url = URL(string: movie.artworkUrl100!)
+            movieDetailsImage.kf.setImage(with: url)
+            
+            if let price = movie.trackPrice {
+                movieDetailsPriceLabel.text = "\(price) TL"
+            }
+            
+            
+            
+        }
+        
+
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
